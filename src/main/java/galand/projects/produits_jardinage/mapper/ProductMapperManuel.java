@@ -3,9 +3,11 @@ package galand.projects.produits_jardinage.mapper;
 import galand.projects.produits_jardinage.dto.CreateProductDTO;
 import galand.projects.produits_jardinage.dto.ProductDTO;
 import galand.projects.produits_jardinage.entity.Product;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ProductMapperManuel implements EntityMapper<Product, ProductDTO>{
     @Override
     public ProductDTO toDto(Product entity) {
