@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDTO {
-    private Long id;
+    private int id;
     private String name;
     private ProductCategory category;
     private BigDecimal price;
