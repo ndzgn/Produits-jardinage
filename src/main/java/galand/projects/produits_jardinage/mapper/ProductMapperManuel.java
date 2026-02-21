@@ -68,6 +68,11 @@ public class ProductMapperManuel implements EntityMapper<Product, ProductDTO>{
                 .build();
     }
 
+    /**
+     * Met a jour une entite existante avec les donnees d'un DTO
+     * @param entity l'entite a mettre a jour
+     * @param dto le DTO source
+     * */
     public void updateEntityFromDto(ProductDTO dto, Product entity)
     {
         if(dto == null || entity == null)
