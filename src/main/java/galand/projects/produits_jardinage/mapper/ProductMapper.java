@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ProductMapperManuel implements EntityMapper<Product, ProductDTO>{
+public class ProductMapper implements EntityMapper<Product, ProductDTO>{
     @Override
     public ProductDTO toDto(Product entity) {
 
@@ -97,4 +97,6 @@ public class ProductMapperManuel implements EntityMapper<Product, ProductDTO>{
     public List<Product> toEntitiesList(List<ProductDTO> dtos) {
         return EntityMapper.super.toEntitiesList(dtos);
     }
+
+
 }
