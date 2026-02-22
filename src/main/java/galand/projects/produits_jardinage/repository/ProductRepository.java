@@ -24,7 +24,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     Boolean existsByNameIgnoreCase(String name);
 
     //Requetes JPQL personnalisees
-    @Query("SELECT p FROM Product p WHERE stock < :threshold AND active = true")
+    @Query("SELECT p FROM Product p WHERE stock <= :threshold AND active = true")
     List<Product> findLowStockProducts(@Param("threshold") Integer threshold);
 
     @Query("SELECT p FROM Product p WHERE p.category = :category ORDER BY p.price DESC")
