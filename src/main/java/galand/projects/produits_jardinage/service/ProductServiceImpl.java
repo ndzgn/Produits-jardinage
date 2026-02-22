@@ -200,7 +200,7 @@ public class ProductServiceImpl implements ProductService{
 
            if (currentStock < quantity)
            {
-               log.error("Stock insuffisant pour le produit: {}", product.getName());
+               log.error("Stock insuffisant pour le produit: {}. Stock disponible : {}. Stock demande : {}", product.getName(), currentStock, quantity);
                throw new InsufficientStockException(product.getName(), quantity, currentStock);
            }
 
@@ -224,6 +224,7 @@ public class ProductServiceImpl implements ProductService{
 
         // on enregistre les modifications dans la base de donnees
         Product updatedProduct = productRepository.save(product);
+        log.info("Nouveau stock pour {}: {}", updatedProduct.getName(), updatedProduct.getStock());
 
         return productMapper.toDto(updatedProduct);
     }
@@ -249,14 +250,14 @@ public class ProductServiceImpl implements ProductService{
         if (discountPercentage.compareTo(BigDecimal.ZERO) < 0 || discountPercentage.compareTo(MAX_DISCOUNT) >0 )
         {
             log.error("Le pourcentage de remise est invalide: {}%", discountPercentage);
-            throw new InvalidPriceException(String.format("Le pourcentage de remise doit etre positif et inferieur a %f ", MAX_DISCOUNT.doubleValue()));
+            throw new InvalidPriceException(String.format("Le pourcentage de remise doit etre positif et inferieur a %f ", MAX_DISCOUNT.setScale(2, RoundingMode.HALF_UP)));
         }
 
         //On recupere le prix du produit
         BigDecimal price = product.getPrice();
 
         //On calcule le montant de la remise
-        BigDecimal discountAmount = price.multiply(MAX_DISCOUNT.divide(new BigDecimal(100),4, RoundingMode.HALF_UP));
+        BigDecimal discountAmount = price.multiply(discountPercentage.divide(new BigDecimal(100),4, RoundingMode.HALF_UP));
 
         //On calcule le nouveau prix du produit
         BigDecimal newPrice = price.subtract(discountAmount);
