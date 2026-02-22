@@ -25,7 +25,7 @@ public interface ProductService {
      * @return le produit s'il existe
      * @throws galand.projects.produits_jardinage.exception.ProductNotFoundException si le produit avec cet id n'existe pas
      * */
-    ProductDTO getProductByID(int id);
+    ProductDTO getProductByID(Integer id);
 
     /**
      * Liste tous les produits actifs
@@ -48,7 +48,7 @@ public interface ProductService {
      * @throws galand.projects.produits_jardinage.exception.ProductNotFoundException si le produit que l'on veut mettre a jour
      * n'existe pas
      * */
-    ProductDTO updateProduct(int id);
+    ProductDTO updateProduct(Integer id, ProductDTO productDTO);
 
 
     /**
@@ -56,7 +56,7 @@ public interface ProductService {
      * @param id du produit a supprimer
      * @throws galand.projects.produits_jardinage.exception.ProductNotFoundException si le produit a supprimer n'existe pas
      * */
-    void deleteProduct(int id);
+    void deleteProduct(Integer id);
 
     /**
      * Met a jour le stock d'un produit soit l'incremente, soit le decremente
@@ -67,7 +67,7 @@ public interface ProductService {
      * @throws galand.projects.produits_jardinage.exception.InsufficientStockException si on veut decrementer et que la
      * quantite restante est insuffisante
      * */
-    ProductDTO adjustStock(int id, Integer quantity);
+    ProductDTO adjustStock(Integer id, Integer quantity);
 
 
     /**
@@ -78,7 +78,7 @@ public interface ProductService {
      * @throws galand.projects.produits_jardinage.exception.ProductNotFoundException si le produit n'existe pas
      * @throws galand.projects.produits_jardinage.exception.InvalidPriceException si la remise est invalide
      * */
-    ProductDTO applyDiscount(int id, BigDecimal discountPercentage);
+    ProductDTO applyDiscount(Integer id, BigDecimal discountPercentage);
 
 
     /**
@@ -93,5 +93,5 @@ public interface ProductService {
      * @param threshold le seuil de stock
      * @return les produits avec stock faible
      * */
-    List<ProductDTO> getLowStockProducts(int threshold);
+    List<ProductDTO> getLowStockProducts(Integer threshold);
 }
