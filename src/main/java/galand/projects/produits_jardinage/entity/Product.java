@@ -31,7 +31,7 @@ public class Product {
     private String description;
     @Column(nullable = false)
     private Boolean active;
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, name = "creation_date")
     private LocalDateTime creationDate;
 
     @PrePersist
