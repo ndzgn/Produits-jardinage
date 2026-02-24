@@ -102,6 +102,28 @@ public class ProductServiceImpl implements ProductService{
     }
 
     /**
+     * @param page le numero de la page
+     * @param size le nombre d'elements a afficher sur la page courante
+     * @param sortBy le parametre a prendre en compte pour le tri
+     * @param sortOrder l'ordre de tri : desc ou asc
+     * @return une page de produit Page<Product>
+     * */
+    public Page<Product> getAllProducts(int page, int size, String sortBy, String sortOrder)
+    {
+        Sort sort = sortOrder.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending(): Sort.by(sortBy).ascending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return productRepository.findAll(pageable);
+    }
+
+
+    public Page<Product> getProductByCategoryAndPrice(BigDecimal minPrice, BigDecimal maxPrice, String category, int page, int size, String sortBy, String orderBy)
+    {
+        Sort sort = orderBy.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return productRepository.filterByCategoryAndPrice(minPrice, maxPrice, category, pageable);
+    }
+
+    /**
      * Recherche les produits par categorie
      *
      * @param category la categorie des produits recherches
