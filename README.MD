@@ -1,1 +1,1 @@
-# Application de gestion pour une entreprise de distribution de produits de jardinage
+# API de gestion d'une plateforme de ventes de produits de jardinage
