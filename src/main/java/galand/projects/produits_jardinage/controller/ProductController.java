@@ -27,9 +27,10 @@ public class ProductController {
      * GET /api/v1/products
      * Recupere tous les produits actifs
      * */
-    @RequestMapping
+    @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllProducts()
     {
+
         log.info("GET /api/v1/products - Recuperation de tous les produits");
         List<ProductDTO> products = productService.getAllActiveProduct();
         return ResponseEntity.ok(products);
@@ -39,7 +40,7 @@ public class ProductController {
      * GET api/v1/products/{id}
      * Recupere un produit a partir de son id
      * */
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProdcutById(@PathVariable int id)
     {
         log.info("GET /api/v1/products/{} - Recuperation du produit", id);
